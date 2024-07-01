@@ -1,79 +1,91 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+StocksApp
+StocksApp is an Android application for a stocks and ETFs broking platform. It provides users with information about top gainers and losers in the market, as well as detailed information about individual stocks and ETFs.
+Features
 
-# Getting Started
+Explore Screen: Displays Top Gainers and Losers in separate tabs
 
->**Note**: Make sure you have completed the [React Native - Environment Setup](https://reactnative.dev/docs/environment-setup) instructions till "Creating a new application" step, before proceeding.
+Grid layout of cards showing stock/ETF information
 
-## Step 1: Start the Metro Server
 
-First, you will need to start **Metro**, the JavaScript _bundler_ that ships _with_ React Native.
+Product Screen: Shows detailed information about a specific stock/ETF
 
-To start Metro, run the following command from the _root_ of your React Native project:
+Basic information display
+Line graph and Candlestick Graph of price history
+![Sample_Video_StockApp](https://github.com/nikhil0235/StocksApp/assets/109364387/d9f76d0a-af84-4293-b45a-e9477316500b)
+![4](https://github.com/nikhil0235/StocksApp/assets/109364387/674c493d-7f7c-472d-8ef1-3a48d62c12cd)
+![3](https://github.com/nikhil0235/StocksApp/assets/109364387/d1c18ce7-1a39-4df8-b154-39eb0b729db9)
+![2](https://github.com/nikhil0235/StocksApp/assets/109364387/0a7b27c1-e43f-43b5-8d1e-ca4d70d3dd9b)
+![1](https://github.com/nikhil0235/StocksApp/assets/109364387/1597d996-250b-4417-991a-f567163158ca)
+![6](https://github.com/nikhil0235/StocksApp/assets/109364387/7fb5fe9f-471d-46f9-a3f1-4071361f2333)
+![5](https://github.com/nikhil0235/StocksApp/assets/109364387/57ab7360-3089-4046-b0eb-055f485a0bac)
+![7](https://github.com/nikhil0235/StocksApp/assets/109364387/ea7a76bc-97b7-41fc-9f33-9b369c391e5c)
 
-```bash
-# using npm
-npm start
 
-# OR using Yarn
-yarn start
-```
 
-## Step 2: Start your Application
+Technology Stack
 
-Let Metro Bundler run in its _own_ terminal. Open a _new_ terminal from the _root_ of your React Native project. Run the following command to start your _Android_ or _iOS_ app:
+React Native
+Alpha Vantage API for market data
 
-### For Android
+Getting Started
+Prerequisites
 
-```bash
-# using npm
-npm run android
+Node.js
+npm or Yarn
+React Native CLI
+Android Studio (for Android development)
 
-# OR using Yarn
-yarn android
-```
+Installation
 
-### For iOS
+Clone the repository:
+git clone https://github.com/yourusername/StocksApp.git
 
-```bash
-# using npm
-npm run ios
+Navigate to the project directory:
+cd StocksApp
 
-# OR using Yarn
-yarn ios
-```
+Install dependencies:
+npm install
+or
+yarn install
 
-If everything is set up _correctly_, you should see your new app running in your _Android Emulator_ or _iOS Simulator_ shortly provided you have set up your emulator/simulator correctly.
+Create a .env file in the root directory and add your Alpha Vantage API key:
+ALPHA_VANTAGE_API_KEY=your_api_key_here
 
-This is one way to run your app — you can also run it directly from within Android Studio and Xcode respectively.
+Start the Metro bundler:
+npx react-native start
 
-## Step 3: Modifying your App
+Run the app on Android:
+npx react-native run-android
 
-Now that you have successfully run the app, let's modify it.
 
-1. Open `App.tsx` in your text editor of choice and edit some lines.
-2. For **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Developer Menu** (<kbd>Ctrl</kbd> + <kbd>M</kbd> (on Window and Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (on macOS)) to see your changes!
+API Integration
+The app uses the following Alpha Vantage API endpoints:
 
-   For **iOS**: Hit <kbd>Cmd ⌘</kbd> + <kbd>R</kbd> in your iOS Simulator to reload the app and see your changes!
+Alpha Intelligence - Top Gainers and Losers
+Fundamental Data - Company Overview
+Core Stocks API - Ticker Search
 
-## Congratulations! :tada:
+Features Implemented
 
-You've successfully run and modified your React Native App. :partying_face:
+ Explore Screen with Top Gainers and Losers
+ Product Screen with basic information and price graph
+ Loading/Error/Empty state handling
+ API response caching with expiration
+ Responsive UI design
 
-### Now what?
+Future Enhancements (Brownie Points)
 
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [Introduction to React Native](https://reactnative.dev/docs/getting-started).
+ Dynamic theme switching (Light/Dark mode)
+ Recent searches suggestions
+ Search categorization (All, Stocks, ETFs)
+ Network and asset optimizations
+ Additional Alpha Vantage API integrations
 
-# Troubleshooting
+Contributing
+Contributions are welcome! Please feel free to submit a Pull Request.
+License
+This project is licensed under the MIT License - see the LICENSE.md file for details.
+Acknowledgments
 
-If you can't get this to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
-
-# Learn More
-
-To learn more about React Native, take a look at the following resources:
-
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+Alpha Vantage for providing the market data API
+React Native Community for the excellent mobile app framework
