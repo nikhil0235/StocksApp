@@ -11,7 +11,7 @@ Product Screen: Shows detailed information about a specific stock/ETF
 
 Basic information display
 Line graph and Candlestick Graph of price history
-![Sample_Video_StockApp](https://github.com/nikhil0235/StocksApp/assets/109364387/d9f76d0a-af84-4293-b45a-e9477316500b)
+![Sample_Video_StockApp](https://github.com/nikhil0235/StocksApp/assets/109364387/440e32a9-243b-4d61-9773-44992bebd85e)
 ![4](https://github.com/nikhil0235/StocksApp/assets/109364387/674c493d-7f7c-472d-8ef1-3a48d62c12cd)
 ![3](https://github.com/nikhil0235/StocksApp/assets/109364387/d1c18ce7-1a39-4df8-b154-39eb0b729db9)
 ![2](https://github.com/nikhil0235/StocksApp/assets/109364387/0a7b27c1-e43f-43b5-8d1e-ca4d70d3dd9b)
@@ -38,7 +38,7 @@ Android Studio (for Android development)
 Installation
 
 Clone the repository:
-git clone https://github.com/yourusername/StocksApp.git
+git clone : https://github.com/nikhil0235/StocksApp
 
 Navigate to the project directory:
 cd StocksApp
@@ -83,8 +83,7 @@ Future Enhancements (Brownie Points)
 
 Contributing
 Contributions are welcome! Please feel free to submit a Pull Request.
-License
-This project is licensed under the MIT License - see the LICENSE.md file for details.
+
 Acknowledgments
 
 Alpha Vantage for providing the market data API
