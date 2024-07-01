@@ -25,7 +25,7 @@ export function DetailsScreen() {
   const handleRangeSelect = async(range) => {
    const res =  await ChartFilter(range);
    setData(res);
-   console.log("data is ",res);
+
   };
 
   useEffect(()=>{
@@ -124,7 +124,6 @@ export function DetailsScreen() {
       <TouchableOpacity 
         onPress={() => {
           setCandleChart(!candleChart);
-          console.log(candleChart);
         }}
         style={{ borderRadius:10, padding:5, backgroundColor: candleChart ? 'black' : '#ffffff' }}
       >

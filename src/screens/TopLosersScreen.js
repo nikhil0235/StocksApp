@@ -20,7 +20,7 @@ const TopLosersScreen = ({ navigation }) => {
 
       if (response.ok) {
         setTopLosers(data.top_losers);
-        console.log(topLosers);
+       
       } else {
         console.error('Failed to fetch data:', data);
       }

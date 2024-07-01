@@ -21,7 +21,7 @@ const TopGainersScreen = ({ navigation }) => {
 
       if (response.ok) {
         setTopGainers(data.top_gainers);
-        console.log(topGainers)
+        
       } else {
         console.error('Failed to fetch data:', data);
       }
