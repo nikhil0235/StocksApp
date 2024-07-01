@@ -1,33 +1,34 @@
-import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import React, { useState } from 'react'; // Import React and useState hook
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'; // Import components from react-native
 
+// Define a functional component named TimeRangeSelector
 export const TimeRangeSelector = ({ onSelect }) => {
-  const [selectedRange, setSelectedRange] = useState('1D');
-  const ranges = ['1D', '1W', '1M', '6M', '5Y', '10Y'];
+  const [selectedRange, setSelectedRange] = useState('1D'); // Define state for the selected range and initialize it to '1D'
+  const ranges = ['1D', '1W', '1M', '6M', '5Y', '10Y']; // Define the available time ranges
 
   const handlePress = (range) => {
-    setSelectedRange(range);
-    onSelect(range);
+    setSelectedRange(range); // Update the selected range state
+    onSelect(range); // Call the onSelect callback with the selected range
   };
 
   return (
-    <View style={styles.container}>
-      {ranges.map((range) => (
+    <View style={styles.container}> 
+      {ranges.map((range) => ( // Iterate over the ranges array to create a button for each range
         <TouchableOpacity
-          key={range}
+          key={range} // Set the key to the range value
           style={[
             styles.button,
-            selectedRange === range && styles.selectedButton,
+            selectedRange === range && styles.selectedButton, // Apply selectedButton style if the range is selected
           ]}
-          onPress={() => handlePress(range)}
+          onPress={() => handlePress(range)} // Handle button press
         >
           <Text
             style={[
               styles.buttonText,
-              selectedRange === range && styles.selectedButtonText,
+              selectedRange === range && styles.selectedButtonText, // Apply selectedButtonText style if the range is selected
             ]}
           >
-            {range}
+            {range} // Display the range text
           </Text>
         </TouchableOpacity>
       ))}
@@ -35,9 +36,10 @@ export const TimeRangeSelector = ({ onSelect }) => {
   );
 };
 
+// Define styles for the component
 const styles = StyleSheet.create({
   container: {
-   flexDirection: 'row',
+    flexDirection: 'row',
     backgroundColor: '#f0f0f0',
     borderRadius: 20,
     padding: 5,
@@ -49,15 +51,15 @@ const styles = StyleSheet.create({
     marginHorizontal: 2,
   },
   selectedButton: {
-    backgroundColor: 'blue',
+    backgroundColor: 'blue', // Style for the selected button
   },
   buttonText: {
     fontSize: 14,
     color: '#000',
   },
   selectedButtonText: {
-    color: '#fff',
+    color: '#fff', // Style for the selected button text
   },
 });
 
-export default TimeRangeSelector;
+export default TimeRangeSelector; // Export the component as default

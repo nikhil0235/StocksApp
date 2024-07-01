@@ -9,56 +9,62 @@ import { ThemeProvider, ThemeContext} from './ThemeContext';
 import { Image, Text, View } from 'react-native';
 import img from './assets/stock-market.png'
 
+// Create a stack navigator
 const Stack = createStackNavigator();
 
 const AppNavigator = () => {
-  const { theme ,toggleTheme} = useContext(ThemeContext);
+  // Get theme and toggleTheme function from ThemeContext
+  const { theme, toggleTheme } = useContext(ThemeContext);
 
-  const[darkMode,setDarkMode] = useState(false);
+  // State to manage dark mode toggle
+  const [darkMode, setDarkMode] = useState(false);
 
-useEffect(() => {
-if(theme==='light'){
-  setDarkMode(true);
-}
-else{
-  setDarkMode(false)
-}
-console.log(darkMode)
-}, [toggleTheme])
+  // Effect to update darkMode state when theme changes
+  useEffect(() => {
+    if (theme === 'light') {
+      setDarkMode(true);
+    } else {
+      setDarkMode(false)
+    }
+  }, [toggleTheme])
 
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Explore" >
+      <Stack.Navigator initialRouteName="Explore">
         <Stack.Screen
           name="StockApp"
           component={ExploreScreen}
           options={{
+            // Add theme toggle switch to header right
             headerRight: () =>
-            <Text style={{margin:10}}>
-            <ToggleSwitch
-            isOn={!darkMode}
-            onColor="green"
-            offColor="orange"
-            labelStyle={{ color: "black", fontWeight: "900" }}
-            size="large"
-            onToggle={toggleTheme}
-          /> </Text>
-          ,
-          headerLeft: () =>  <Image source={img} style={{height:40,width:40,marginLeft:5,}} />,
+              <Text style={{margin:10}}>
+                <ToggleSwitch
+                  isOn={!darkMode}
+                  onColor="green"
+                  offColor="orange"
+                  labelStyle={{ color: "black", fontWeight: "900" }}
+                  size="large"
+                  onToggle={toggleTheme}
+                />
+              </Text>,
+            // Add logo to header left
+            headerLeft: () => <Image source={img} style={{height:40, width:40, marginLeft:5,}} />,
           }}
         />
         <Stack.Screen
           name="Details"
           component={DetailsScreen}
           options={{
-            headerRight: () => <ToggleSwitch
-            isOn={!darkMode}
-            onColor="green"
-            offColor="orange"
-            labelStyle={{ color: "black", fontWeight: "900" }}
-            size="large"
-            onToggle={toggleTheme}
-          />,
+            // Add theme toggle switch to header right
+            headerRight: () => 
+              <ToggleSwitch
+                isOn={!darkMode}
+                onColor="green"
+                offColor="orange"
+                labelStyle={{ color: "black", fontWeight: "900" }}
+                size="large"
+                onToggle={toggleTheme}
+              />,
           }}
         />
       </Stack.Navigator>
@@ -68,7 +74,8 @@ console.log(darkMode)
 
 const App = () => {
   return (
-    <ThemeProvider >
+    // Wrap the entire app with ThemeProvider
+    <ThemeProvider>
       <AppNavigator />
     </ThemeProvider>
   );

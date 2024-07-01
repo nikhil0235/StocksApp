@@ -8,35 +8,40 @@ import TimeRangeSelector from '../Layout/TimeRangeSelector';
 import TickerSearch from '../Layout/SearchBar';
 import { ChartFilter } from '../utils/chartFilter';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import picture from '../../assets/stock-market.png'
+import picture from '../../assets/stock-market.png';
 import { Chart } from '../Layout/CandleGrpah';
 
-
 export function DetailsScreen() {
-  const[data,setData] = useState([]);
-  const[candleChart,setCandleChart]  =useState(false);
+  // State to store fetched data
+  const [data, setData] = useState([]);
+  // State to toggle between line chart and candle chart
+  const [candleChart, setCandleChart] = useState(false);
+  // State to store company data fetched from API
   const [companyData, setCompanyData] = useState(null);
-  const route = useRoute() ;
-  const { ticker ,img} = route.params;
- 
+  // Getting route parameters
+  const route = useRoute();
+  const { ticker, img } = route.params;
+  // Getting the current theme from context
   const { theme } = useContext(ThemeContext);
   const styles = getStyles(theme);
   
-  const handleRangeSelect = async(range) => {
-   const res =  await ChartFilter(range);
-   setData(res);
-
+  // Function to handle the selection of time range for the chart
+  const handleRangeSelect = async (range) => {
+    const res = await ChartFilter(range);
+    setData(res);
   };
 
-  useEffect(()=>{
-   handleRangeSelect('1D');
-  },[])
+  // Effect to fetch default range data when the component mounts
+  useEffect(() => {
+    handleRangeSelect('1D');
+  }, []);
 
+  // Effect to fetch company data based on the ticker when the component mounts or ticker changes
   useEffect(() => {
     async function fetchData() {
       try {
         const apiKey = 'EX02PYVJKEHGVVZA';
-        // const url = `https://www.alphavantage.co/query?function=OVERVIEW&symbol=${ticker}&apikey=${apiKey}`;
+        // Example API call to fetch company data (update URL for actual use)
         const url = `https://www.alphavantage.co/query?function=OVERVIEW&symbol=IBM&apikey=demo`;
         const response = await fetch(url);
 
@@ -54,21 +59,20 @@ export function DetailsScreen() {
     fetchData();
   }, [ticker]);
 
-//  
-  if (!companyData || data.length ===0 ) {
-    
-      return (
-        <View style={styles.loadingContainer}>
-          <ActivityIndicator   size="large" color={theme === 'dark' ? '#fff' : '#0000ff'} />
-        </View>
-      );
-    } 
+  // Show loading indicator if company data or chart data is not yet available
+  if (!companyData || data.length === 0) {
+    return (
+      <View style={styles.loadingContainer}>
+        <ActivityIndicator size="large" color={theme === 'dark' ? '#fff' : '#0000ff'} />
+      </View>
+    );
+  }
 
   return (
     <ScrollView style={styles.container}>
       <View style={styles.header}>
         <Text style={styles.title}>Details Screen</Text>
-       <TickerSearch/>
+        <TickerSearch />
       </View>
       <View style={styles.companyHeader}>
         <Image 
@@ -83,74 +87,78 @@ export function DetailsScreen() {
         </View>
       </View>
       <View style={styles.chartContainer}>
-    { 
-  candleChart?<Chart/>:data.length>0 && 
-<LineChart
-  data={{
-    labels: data.filter((_, index) => index % 20 === 0).map(item => item.date.slice(20)),
-    datasets: [{ data: data.map(item => item.value) }],
-  }}
-  width={Dimensions.get('window').width - 32}
-  height={220}
-  yAxisLabel="$"
-  chartConfig={{
-    backgroundColor: "#ffffff",
-    backgroundGradientFrom: "#ffffff",
-    backgroundGradientTo: "#ffffff",
-    decimalPlaces: 2,
-    color: (opacity = 1) => `rgba(0, 0, 255, ${opacity})`,
-    labelColor: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
-    style: { borderRadius: 16 },
-    propsForDots: { r: ".5", strokeWidth: "1", stroke: "#0000ff" },
-    propsForBackgroundLines: {
-      strokeDasharray: "", // solid background lines
-    },
-    fillShadowGradient: "#ffffff",
-    fillShadowGradientOpacity: 0,
-    propsForLabels: {
-      transform: [{ rotate: '45deg' }],
-      anchor: 'middle',
-      alignmentBaseline: 'middle',
-      // Make the x-axis labels transparent
-      color: 'transparent',
-    },
-  }}
-  bezier
-  style={{ marginVertical: 8, borderRadius: 16 }}
-/>}
-
-<View style={{ marginLeft: 30, width: '100%', flexDirection: 'row', alignItems: 'center' }}>
-      <TimeRangeSelector onSelect={handleRangeSelect} />
-      <TouchableOpacity 
-        onPress={() => {
-          setCandleChart(!candleChart);
-        }}
-        style={{ borderRadius:10, padding:5, backgroundColor: candleChart ? 'black' : '#ffffff' }}
-      >
-        <Image source={picture} style={{ width: 30, height: 30 }} />
-      </TouchableOpacity>
-    </View>
+        {
+          candleChart ? 
+          <Chart /> : 
+          data.length > 0 &&
+          <LineChart
+            data={{
+              labels: data.filter((_, index) => index % 20 === 0).map(item => item.date.slice(20)),
+              datasets: [{ data: data.map(item => item.value) }],
+            }}
+            width={Dimensions.get('window').width - 32}
+            height={220}
+            yAxisLabel="$"
+            chartConfig={{
+              backgroundColor: "#ffffff",
+              backgroundGradientFrom: "#ffffff",
+              backgroundGradientTo: "#ffffff",
+              decimalPlaces: 2,
+              color: (opacity = 1) => `rgba(0, 0, 255, ${opacity})`,
+              labelColor: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
+              style: { borderRadius: 16 },
+              propsForDots: { r: ".5", strokeWidth: "1", stroke: "#0000ff" },
+              propsForBackgroundLines: {
+                strokeDasharray: "", // solid background lines
+              },
+              fillShadowGradient: "#ffffff",
+              fillShadowGradientOpacity: 0,
+              propsForLabels: {
+                transform: [{ rotate: '45deg' }],
+                anchor: 'middle',
+                alignmentBaseline: 'middle',
+                color: 'transparent',
+              },
+            }}
+            bezier
+            style={{ marginVertical: 8, borderRadius: 16 }}
+          />
+        }
+        <View style={{ marginLeft: 30, width: '100%', flexDirection: 'row', alignItems: 'center' }}>
+          <TimeRangeSelector onSelect={handleRangeSelect} />
+          <TouchableOpacity 
+            onPress={() => {
+              setCandleChart(!candleChart);
+            }}
+            style={{ borderRadius: 10, padding: 5, backgroundColor: candleChart ? 'black' : '#ffffff' }}
+          >
+            <Image source={picture} style={{ width: 30, height: 30 }} />
+          </TouchableOpacity>
+        </View>
       </View>
       <View style={styles.aboutSection}>
         <Text style={styles.sectionTitle}>About {companyData.Name}</Text>
         <Text style={styles.description}>{companyData.Description}</Text>
         <View style={styles.sectorIndustry}>
-          <View style={styles.info_}><Text style={styles.infoTitle}>Industry:</Text>
-          <Text style={styles.infoValue}>{companyData.Industry}</Text></View>
           <View style={styles.info_}>
-          <Text style={styles.infoTitle}>Sector:</Text>
-          <Text style={styles.infoValue}>{companyData.Sector}</Text></View>
+            <Text style={styles.infoTitle}>Industry:</Text>
+            <Text style={styles.infoValue}>{companyData.Industry}</Text>
+          </View>
+          <View style={styles.info_}>
+            <Text style={styles.infoTitle}>Sector:</Text>
+            <Text style={styles.infoValue}>{companyData.Sector}</Text>
+          </View>
         </View>
         <View style={styles.weekLowHigh}>
-      <View style={styles.info_}>
-        <Text style={styles.infoTitle}>52 Week Low</Text>
-        <Text style={styles.infoValue}>{companyData['52WeekLow']}</Text>
-      </View>
-      <View style={styles.info_}>
-        <Text style={styles.infoTitle}>52 Week High</Text>
-        <Text style={styles.infoValue}>{companyData['52WeekHigh']}</Text>
-      </View>
-    </View>
+          <View style={styles.info_}>
+            <Text style={styles.infoTitle}>52 Week Low</Text>
+            <Text style={styles.infoValue}>{companyData['52WeekLow']}</Text>
+          </View>
+          <View style={styles.info_}>
+            <Text style={styles.infoTitle}>52 Week High</Text>
+            <Text style={styles.infoValue}>{companyData['52WeekHigh']}</Text>
+          </View>
+        </View>
         <View style={styles.marketData}>
           <View style={styles.info_}>
             <Text style={styles.dataTitle}>Market Cap</Text>

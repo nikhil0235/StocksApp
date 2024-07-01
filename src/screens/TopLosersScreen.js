@@ -1,37 +1,45 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { View, Text, FlatList, TouchableOpacity, ActivityIndicator, Image, Dimensions } from 'react-native';
-import { ThemeContext } from '../../ThemeContext';
-import { Logo } from '../../assets/Logo';
+import React, { useContext, useEffect, useState } from 'react'; // Import necessary hooks from React
+import { View, Text, FlatList, TouchableOpacity, ActivityIndicator, Image, Dimensions } from 'react-native'; // Import necessary components from react-native
+import { ThemeContext } from '../../ThemeContext'; // Import ThemeContext for theming
+import { Logo } from '../../assets/Logo'; // Import Logo images
 
 const TopLosersScreen = ({ navigation }) => {
+  // State for storing top losers data
   const [topLosers, setTopLosers] = useState([]);
+  // State for managing loading state
   const [loading, setLoading] = useState(true);
+  // Get the current theme from the ThemeContext
   const { theme } = useContext(ThemeContext);
+  // Get styles based on the current theme
   const styles = getStyles(theme);
 
   useEffect(() => {
+    // Fetch data when the component mounts
     fetchData();
   }, []);
 
   const fetchData = async () => {
     try {
+      // Fetch top losers data from the API
       const response = await fetch('https://www.alphavantage.co/query?function=TOP_GAINERS_LOSERS&apikey=demo');
       const data = await response.json();
 
       if (response.ok) {
+        // Set the top losers data if the request was successful
         setTopLosers(data.top_losers);
-       
       } else {
         console.error('Failed to fetch data:', data);
       }
     } catch (error) {
       console.error('Error fetching data:', error);
     } finally {
+      // Set loading state to false
       setLoading(false);
     }
   };
 
   if (loading) {
+    // Show loading indicator while data is being fetched
     return (
       <View style={styles.loadingContainer}>
         <ActivityIndicator size="large" color={theme === 'dark' ? '#ffffff' : '#0000ff'} />
@@ -42,11 +50,12 @@ const TopLosersScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <FlatList
-        numColumns={2}
-        data={topLosers}
-        keyExtractor={(item) => item.ticker}
+        numColumns={2} // Show items in two columns
+        data={topLosers} // Data to be displayed
+        keyExtractor={(item) => item.ticker} // Key for each item
         renderItem={({ item, index }) => (
-          <TouchableOpacity onPress={() => navigation.navigate('Details', { ticker: item.ticker ,img : Logo[index % Logo.length] })}>
+          // Navigate to Details screen on item press
+          <TouchableOpacity onPress={() => navigation.navigate('Details', { ticker: item.ticker, img: Logo[index % Logo.length] })}>
             <View style={styles.itemContainer}>
               <Image 
                 source={{ uri: Logo[index % Logo.length] }} 
@@ -64,8 +73,9 @@ const TopLosersScreen = ({ navigation }) => {
   );
 };
 
+// Get the dimensions of the window
 const { width } = Dimensions.get('window');
-const itemWidth = (width - 80) / 2;
+const itemWidth = (width - 80) / 2; // Calculate item width
 
 const getStyles = (theme) => ({
   container: {
@@ -87,23 +97,19 @@ const getStyles = (theme) => ({
     margin: 10,
     padding: 10,
     borderRadius: 10,
-    backgroundColor: '#9CA3AF',
-    padding: 16,
-    margin: 16,
-    borderRadius: 8,
+    backgroundColor: theme === 'dark' ? '#444' : '#f9f9f9',
+    borderWidth: 1,
+    borderColor: theme === 'dark' ? '#555' : '#ddd',
+    width: itemWidth,
+    height: itemWidth * 1.2, // Adjust the height to width ratio as needed
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
     elevation: 5,
-    width: itemWidth,
-    height: itemWidth * 1.2,
-    backgroundColor: theme === 'dark' ? '#444' : '#f9f9f9',
-    borderWidth: 1,
-    borderColor: theme === 'dark' ? '#555' : '#ddd',
   },
   itemImage: {
-    width: 50,
+    width: 51,
     height: 50,
     marginBottom: 10,
   },
@@ -124,4 +130,5 @@ const getStyles = (theme) => ({
   },
 });
 
-export default TopLosersScreen;
+export default TopLosersScreen; // Export TopLosersScreen component as default
+2322323
