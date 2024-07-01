@@ -3,11 +3,11 @@ import chartData from '../utils/tempChartData.json'
 export const formattedData = async() => {
     const sampleDataDates = [];
     
-    if (!chartData['Time Series (5min)']) {
+    if (!chartData['Time Series (Daily)']) {
       return sampleDataDates;
     }
   
-    Object.entries(chartData['Time Series (5min)']).forEach(([date, values]) => {
+    Object.entries(chartData['Time Series (Daily)']).forEach(([date, values]) => {
       sampleDataDates.push({
         timestamp: Date.parse(date),
         open: parseFloat(values['1. open']),

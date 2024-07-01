@@ -5,8 +5,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import ExploreScreen from './src/screens/ExploreScreen';
 import DetailsScreen from './src/screens/DetailsScreen';
 import ToggleSwitch from 'toggle-switch-react-native';
-import { ThemeProvider, ThemeContext, customLightTheme, customDarkTheme } from './ThemeContext';
-import Icon from 'react-native-vector-icons/Ionicons';
+import { ThemeProvider, ThemeContext} from './ThemeContext';
 import { Image, Text, View } from 'react-native';
 import img from './assets/stock-market.png'
 

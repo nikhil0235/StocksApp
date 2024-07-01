@@ -7,13 +7,14 @@ import { ThemeContext } from '../../ThemeContext';
 import TimeRangeSelector from '../Layout/TimeRangeSelector';
 import TickerSearch from '../Layout/SearchBar';
 import { ChartFilter } from '../utils/chartFilter';
-import { CandleStickGraph } from '../Layout/CandleStickGrpah';
-
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import picture from '../../assets/stock-market.png'
+import { Chart } from '../Layout/CandleGrpah';
 
 
 export function DetailsScreen() {
   const[data,setData] = useState([]);
-  // const[candleStickChart,Chart]  =useState(false);
+  const[candleChart,setCandleChart]  =useState(false);
   const [companyData, setCompanyData] = useState(null);
   const route = useRoute() ;
   const { ticker ,img} = route.params;
@@ -82,7 +83,8 @@ export function DetailsScreen() {
         </View>
       </View>
       <View style={styles.chartContainer}>
-    {  data.length>0 && 
+    { 
+  candleChart?<Chart/>:data.length>0 && 
 <LineChart
   data={{
     labels: data.filter((_, index) => index % 20 === 0).map(item => item.date.slice(20)),
@@ -116,7 +118,19 @@ export function DetailsScreen() {
   bezier
   style={{ marginVertical: 8, borderRadius: 16 }}
 />}
-        <TimeRangeSelector onSelect={handleRangeSelect} />
+
+<View style={{ marginLeft: 30, width: '100%', flexDirection: 'row', alignItems: 'center' }}>
+      <TimeRangeSelector onSelect={handleRangeSelect} />
+      <TouchableOpacity 
+        onPress={() => {
+          setCandleChart(!candleChart);
+          console.log(candleChart);
+        }}
+        style={{ borderRadius:10, padding:5, backgroundColor: candleChart ? 'black' : '#ffffff' }}
+      >
+        <Image source={picture} style={{ width: 30, height: 30 }} />
+      </TouchableOpacity>
+    </View>
       </View>
       <View style={styles.aboutSection}>
         <Text style={styles.sectionTitle}>About {companyData.Name}</Text>
@@ -235,6 +249,7 @@ const getStyles = (theme) => StyleSheet.create({
   },
   chartContainer: {
     marginVertical: 16,
+    width:'80%',
     alignItems: 'center',
   },
   aboutSection: {
