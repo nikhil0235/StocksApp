@@ -12,9 +12,7 @@ Product Screen: Shows detailed information about a specific stock/ETF
 Basic information display
 Line graph and Candlestick Graph of price history
 
-https://github.com/nikhil0235/StocksApp/assets/109364387/3bcc9512-29d5-4df5-b6ad-5227522e611f
-
-![Sample_Video_Stock_App](https://github.com/nikhil0235/StocksApp/assets/109364387/847e260b-7f76-4e90-8c59-292763bd7678)
+![Sample_Video_Stock_App](https://github.com/nikhil0235/StocksApp/assets/109364387/bf089a3f-402c-4b28-bf3d-83c83a23ab5c)
 
 
 ![4](https://github.com/nikhil0235/StocksApp/assets/109364387/674c493d-7f7c-472d-8ef1-3a48d62c12cd)
