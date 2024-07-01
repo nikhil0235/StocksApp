@@ -14,6 +14,7 @@ Line graph and Candlestick Graph of price history
 
 https://github.com/nikhil0235/StocksApp/assets/109364387/3bcc9512-29d5-4df5-b6ad-5227522e611f
 
+![Sample_Video_Stock_App](https://github.com/nikhil0235/StocksApp/assets/109364387/847e260b-7f76-4e90-8c59-292763bd7678)
 
 
 ![4](https://github.com/nikhil0235/StocksApp/assets/109364387/674c493d-7f7c-472d-8ef1-3a48d62c12cd)
