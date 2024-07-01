@@ -249,7 +249,6 @@ const getStyles = (theme) => StyleSheet.create({
   },
   chartContainer: {
     marginVertical: 16,
-    width:'80%',
     alignItems: 'center',
   },
   aboutSection: {
